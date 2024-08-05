@@ -9,6 +9,7 @@ class InitPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // return Text("Wuhu");
     return FutureBuilder(
       future: getPetFromScan(code),
       builder: (context, snapshot) {
@@ -16,6 +17,7 @@ class InitPage extends StatelessWidget {
           return PetScreen(
             petProfileDetails: snapshot.data!,
           );
+          // return Text("Wuhu");
         } else if (snapshot.hasError) {
           return Text(snapshot.error.toString());
         } else {

@@ -18,7 +18,7 @@ class Pictures extends StatefulWidget {
 }
 
 class _PicturesState extends State<Pictures> {
-  final PageController _controller = PageController();
+  final PageController _controller = PageController(viewportFraction: 1);
 
   @override
   Widget build(BuildContext context) {
@@ -29,16 +29,24 @@ class _PicturesState extends State<Pictures> {
           PointerDeviceKind.mouse,
         },
       ),
-      child: Stack(
-        children: [
-          PageView.builder(
+      child: AspectRatio(
+        aspectRatio: 1 / 1,
+        child: ScrollConfiguration(
+          behavior: ScrollConfiguration.of(context).copyWith(
+            dragDevices: {
+              PointerDeviceKind.touch,
+              PointerDeviceKind.mouse,
+            },
+          ),
+          child: PageView.builder(
             physics: const BouncingScrollPhysics(),
             controller: _controller,
             pageSnapping: true,
             scrollDirection: Axis.horizontal,
-            itemCount: widget.pictures.length,
+            // itemCount: widget.pictures.length,
+            itemCount: 4,
             itemBuilder: (context, position) {
-              return GestureDetector(
+              return InkWell(
                 onTap: () {
                   Navigator.of(context).push(
                     PageRouteBuilder(
@@ -46,50 +54,28 @@ class _PicturesState extends State<Pictures> {
                       barrierDismissible: true,
                       pageBuilder: (BuildContext context, _, __) {
                         return PetPictureExpanded(
-                          picture: widget.pictures.elementAt(position),
+                          // picture: widget.pictures.elementAt(position),
+                          picture: null,
                         );
                       },
                     ),
                   );
                 },
                 child: Hero(
-                  tag:
-                      "picture${widget.pictures.elementAt(position).petPictureId}",
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(0),
-                    child: Image.network(
-                      s3BaseUrl +
-                          widget.pictures.elementAt(position).petPictureLink,
-                      fit: BoxFit.cover,
-                    ),
+                  // tag:
+                  //     "picture${widget.pictures.elementAt(position).petPictureId}",
+                  tag: "d",
+                  child: Image.network(
+                    // s3BaseUrl +
+                    //     widget.pictures.elementAt(position).petPictureLink,
+                    "https://picsum.photos/400",
+                    fit: BoxFit.cover,
                   ),
                 ),
               );
             },
           ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: SmoothPageIndicator(
-                controller: _controller, // PageController
-                count: widget.pictures.length,
-                effect: WormEffect(
-                  // activeDotColor: getCustomColors(context).accent!,
-                  activeDotColor: Colors.white,
-                  // dotColor: Colors.white.withOpacity(0.25),
-                  dotHeight: 12,
-                  dotWidth: 12,
-                  spacing: 12,
-                  // type: WormType.thin,
-                ),
-                onDotClicked: (index) {
-                  _controller.jumpToPage(index);
-                },
-              ),
-            ),
-          )
-        ],
+        ),
       ),
     );
   }

@@ -1,7 +1,9 @@
+import 'm_behaviour_information.dart';
 import 'm_contact.dart';
 import 'm_description.dart';
 import 'm_document.dart';
 import 'm_pet_picture.dart';
+import 'medical/m_medical_information.dart';
 
 enum Gender { male, female, none }
 
@@ -27,6 +29,8 @@ class PetProfileDetails {
   // List<Tag> tag;
   // final List<Scan> petProfileScans;
   bool hideContacts;
+  BehaviourInformation behaviourInformation;
+  MedicalInformation medicalInformation;
 
   // PetProfileDetails clone() => PetProfileDetails(
   //       profileId,
@@ -71,6 +75,8 @@ class PetProfileDetails {
     // this.petProfileScans,
     // this.tag,
     this.hideContacts,
+    this.behaviourInformation,
+    this.medicalInformation,
   );
 
   PetProfileDetails.fromJson(Map<String, dynamic> json)
@@ -110,7 +116,11 @@ class PetProfileDetails {
             ? (json['pet_pictures'] as List)
                 .map((t) => PetPicture.fromJson(t))
                 .toList()
-            : [];
+            : [],
+        behaviourInformation =
+            BehaviourInformation.fromJson(json['BehaviourInformation']),
+        medicalInformation =
+            MedicalInformation.fromJson(json['MedicalInformation']);
   // petProfileScans = json['pet_profile_scans'] != null
   //     ? (json['pet_profile_scans'] as List)
   //         .map((t) => Scan.fromJson(t))

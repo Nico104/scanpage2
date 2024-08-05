@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <!--
     If you are serving your web app in a path other than the root, change the
@@ -27,7 +28,7 @@
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png"/>
+  <link rel="icon" type="image/png" href="favicon.png" />
 
   <title>scanpage</title>
   <link rel="manifest" href="manifest.json">
@@ -38,22 +39,64 @@
   </script>
   <!-- This script adds the flutter initialization JS code -->
   <script src="flutter.js" defer></script>
+
+  <!-- Loading stuff https://retroportalstudio.medium.com/indicate-website-loading-for-flutter-web-apps-7dc5e2c59e24-->
+  <style>
+    .container {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      /* Default Axis is X*/
+      justify-content: center;
+      /* Main Axis */
+      align-items: center;
+      /* Cross Axis */
+    }
+
+    .indicator {
+      width: 50vw;
+    }
+  </style>
 </head>
-<body>
+
+<body style="overflow: hidden">
+  <!-- Loading stuff https://retroportalstudio.medium.com/indicate-website-loading-for-flutter-web-apps-7dc5e2c59e24-->
+  <div id="loading_indicator" class="container">
+    <img class="indicator" src="./assets/loading.gif" />
+  </div>
+
   <script>
-    window.addEventListener('load', function(ev) {
+    window.addEventListener('load', function (ev) {
       // Download main.dart.js
       _flutter.loader.loadEntrypoint({
         serviceWorker: {
           serviceWorkerVersion: serviceWorkerVersion,
         },
-        onEntrypointLoaded: function(engineInitializer) {
-          engineInitializer.initializeEngine().then(function(appRunner) {
+        onEntrypointLoaded: function (engineInitializer) {
+          engineInitializer.initializeEngine().then(function (appRunner) {
             appRunner.runApp();
+
+
+            //Loading
+            var loadingIndicator = document.getElementById("loading_indicator");
+            if (loadingIndicator) {
+              loadingIndicator.remove();
+            }
           });
         }
       });
     });
+
+    //Loading
+    window.onload = function () {
+      setTimeout(function () {
+        var loadingIndicator = document.getElementById("loading_indicator");
+        if (loadingIndicator) {
+          loadingIndicator.remove();
+        }
+      }, 10000);
+    };
   </script>
 </body>
+
 </html>

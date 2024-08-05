@@ -11,7 +11,7 @@ import '../../utils/models/m_pet_picture.dart';
 class PetPictureExpanded extends StatelessWidget {
   const PetPictureExpanded({super.key, required this.picture});
 
-  final PetPicture picture;
+  final PetPicture? picture;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,8 @@ class PetPictureExpanded extends StatelessWidget {
           color: Colors.black.withOpacity(0.06),
           child: Center(
             child: Hero(
-              tag: "picture${picture.petPictureId}",
+              // tag: "picture${picture.petPictureId}",
+              tag: "t",
               child: Material(
                 borderRadius: BorderRadius.circular(22),
                 elevation: 8,
@@ -41,9 +42,10 @@ class PetPictureExpanded extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(22),
                     child: Image.network(
-                      s3BaseUrl + picture.petPictureLink,
-                      // 'fit: BoxFit.contain,
-                    ),
+                        // s3BaseUrl + picture.petPictureLink,
+                        "https://picsum.photos/800"
+                        // 'fit: BoxFit.contain,
+                        ),
                   ),
                 ),
               ),
