@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../utils/models/m_behaviour_information.dart';
@@ -12,42 +13,44 @@ class BehInformation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(behaviourInformation.goodWithCars);
     return ListView(
+      physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       children: [
         behaviourInformation.goodWithStrangers != null
             ? BehItem(
                 answer: getAnswer(behaviourInformation.goodWithStrangers!),
-                title: "Friendly to Strangers",
-                subtitle: "Honey is nice to new people",
+                title: "sp_BehInfo_StrangersLabel".tr(),
+                subtitle: "sp_BehInfo_StarngersDescription".tr(),
               )
             : const SizedBox.shrink(),
         behaviourInformation.goodWithCars != null
             ? BehItem(
                 answer: getAnswer(behaviourInformation.goodWithCars!),
-                title: "Good with Cars",
-                subtitle: "Honey doesnt get agitaded around cars",
+                title: "sp_BehInfo_CarsLabel".tr(),
+                subtitle: "sp_BehInfo_CarsDescription",
               )
             : const SizedBox.shrink(),
         behaviourInformation.goodWithDogs != null
             ? BehItem(
                 answer: getAnswer(behaviourInformation.goodWithDogs!),
-                title: "Friendly to dogs",
-                subtitle: "Honey is nice with other dogs",
+                title: "sp_BehInfo_DogsLabel".tr(),
+                subtitle: "sp_BehInfo_DogsDescription".tr(),
               )
             : const SizedBox.shrink(),
         behaviourInformation.goodWithCats != null
             ? BehItem(
                 answer: getAnswer(behaviourInformation.goodWithCats!),
-                title: "Friendly to cats",
-                subtitle: "Honey is nice with cats",
+                title: "sp_BehInfo_CatsLabel".tr(),
+                subtitle: "sp_BehInfo_CatsDescription".tr(),
               )
             : const SizedBox.shrink(),
         behaviourInformation.goodWithKids != null
             ? BehItem(
                 answer: getAnswer(behaviourInformation.goodWithKids!),
-                title: "Friendly to Kids",
-                subtitle: "Honey is nice to children",
+                title: "sp_BehInfo_KidsLabel".tr(),
+                subtitle: "Honey is nice to children".tr(),
               )
             : const SizedBox.shrink(),
       ],

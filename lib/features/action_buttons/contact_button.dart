@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:scanpage/features/contacts/choose_contact_dialog.dart';
 import 'package:scanpage/utils/models/m_contact.dart';
@@ -10,12 +11,17 @@ import '../../utils/models/m_pet_profile.dart';
 import '../../utils/widgets/custom_nico_modal.dart';
 
 class ContactButton extends StatelessWidget {
-  const ContactButton({super.key, required this.petProfileDetails});
+  const ContactButton(
+      {super.key,
+      required this.petProfileDetails,
+      required this.scrollToContacts});
 
   final PetProfileDetails petProfileDetails;
 
   final double _borderRadius = 32;
   final double _height = 65;
+
+  final VoidCallback scrollToContacts;
 
   String? getPrimaryNumber(BuildContext context) {
     int contactamount = petProfileDetails.petContacts.length;
@@ -78,9 +84,17 @@ class ContactButton extends StatelessWidget {
 
         if (phoneNumbers.isEmpty) {
           //initiate mail or social media
+          scrollToContacts();
         }
         if (phoneNumbers.length == 1) {
           //call unique number
+          // final Uri toLaunch = Uri(
+          //     scheme: 'tel',
+          //     host: phoneNumbers.first.country.countryPhonePrefix +
+          //         phoneNumbers.first.phoneNumber);
+          final Uri toLaunch =
+              Uri(scheme: 'tel', host: phoneNumbers.first.phoneNumber);
+          launchUrl(toLaunch);
         } else {
           // Navigator.of(context).push(
           //   PageRouteBuilder(
@@ -125,7 +139,7 @@ class ContactButton extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.only(left: 32, right: 24),
                     child: Text(
-                      "Contact",
+                      "sp_ContactButtonLabel".tr(),
                       // style: GoogleFonts.prompt(
                       //   fontWeight: FontWeight.w400,
                       //   fontSize: 16,

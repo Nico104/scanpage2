@@ -6,21 +6,22 @@ import 'package:scanpage/utils/models/m_pet_profile.dart';
 
 import 'location_button.dart';
 
-class ActionButtons extends StatefulWidget {
-  const ActionButtons({super.key, required this.petProfileDetails});
+class ActionButtons extends StatelessWidget {
+  const ActionButtons(
+      {super.key,
+      required this.petProfileDetails,
+      required this.scrollToContacts,
+      required this.scanned});
 
   final PetProfileDetails petProfileDetails;
+  final VoidCallback scrollToContacts;
+  final bool scanned;
 
-  @override
-  State<ActionButtons> createState() => _ActionButtonsState();
-}
-
-class _ActionButtonsState extends State<ActionButtons> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       // width: double.infinity,
-      height: 200,
+      // height: 200,
       child: ClipRRect(
         child: Container(
           decoration: BoxDecoration(
@@ -34,17 +35,33 @@ class _ActionButtonsState extends State<ActionButtons> {
             ),
           ),
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(16, 0, 16, 32),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                LocationButton(),
-                // Spacer(),
-                ContactButton(
-                  petProfileDetails: widget.petProfileDetails,
-                ),
-              ],
+            padding: const EdgeInsets.fromLTRB(8, 24, 8, 32),
+            child: OverflowBar(
+              alignment: MainAxisAlignment.spaceEvenly,
+              overflowAlignment: OverflowBarAlignment.center,
+              overflowSpacing: 16,
+              // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              // crossAxisAlignment: CrossAxisAlignment.end,
+              children: (scanned
+                      ? petProfileDetails.scan_hide_contacts
+                      : petProfileDetails.hide_contacts)
+                  ? [
+                      LocationButton(
+                        petProfileId: petProfileDetails.profileId,
+                        contactCallback: scrollToContacts,
+                      ),
+                    ]
+                  : [
+                      LocationButton(
+                        petProfileId: petProfileDetails.profileId,
+                        contactCallback: scrollToContacts,
+                      ),
+                      // Spacer(),
+                      ContactButton(
+                        petProfileDetails: petProfileDetails,
+                        scrollToContacts: scrollToContacts,
+                      ),
+                    ],
             ),
           ),
         ),

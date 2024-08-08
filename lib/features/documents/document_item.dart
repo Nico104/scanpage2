@@ -17,17 +17,18 @@ class DocumentItem extends StatelessWidget {
           children: [
             const Icon(Icons.file_present),
             const SizedBox(width: 12),
-            Flexible(
+            Expanded(
               child: Text(
                 document.documentName,
                 style: GoogleFonts.openSans(
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.w400,
                   fontSize: 18,
-                  color: Colors.black.withOpacity(0.8),
+                  color: Colors.black.withOpacity(0.85),
                 ),
               ),
             ),
-            const Spacer(),
+            // const Spacer(),
+            const SizedBox.square(dimension: 8),
             const Icon(Icons.arrow_forward),
           ],
         ),

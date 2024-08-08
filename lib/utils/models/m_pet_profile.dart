@@ -1,9 +1,12 @@
-import 'm_behaviour_information.dart';
-import 'm_contact.dart';
+// import 'package:userapp/feature/pets/profile_details/models/m_contact.dart';
+
+import 'package:scanpage/utils/models/m_contact.dart';
+
 import 'm_description.dart';
 import 'm_document.dart';
 import 'm_pet_picture.dart';
-import 'medical/m_medical_information.dart';
+// import 'm_scan.dart';
+// import 'm_tag.dart';
 
 enum Gender { male, female, none }
 
@@ -28,9 +31,26 @@ class PetProfileDetails {
   bool petIsLost;
   // List<Tag> tag;
   // final List<Scan> petProfileScans;
-  bool hideContacts;
-  BehaviourInformation behaviourInformation;
-  MedicalInformation medicalInformation;
+  String? pet_tattooID;
+  String? pet_licenceID;
+  String? pet_favorite_toys;
+  String? pet_favorite_activities;
+  String? pet_behavioral_notes;
+  String? pet_special_needs;
+  String? pet_diet_preferences;
+  bool scan_hide_contacts;
+  bool scan_hide_information;
+  bool scan_hide_medical;
+  bool scan_hide_pictures;
+  bool scan_hide_documents;
+  bool scan_hide_description;
+  bool hide_contacts;
+  bool hide_information;
+  bool hide_medical;
+  bool hide_pictures;
+  bool hide_documents;
+  bool hide_description;
+  String description;
 
   // PetProfileDetails clone() => PetProfileDetails(
   //       profileId,
@@ -74,13 +94,31 @@ class PetProfileDetails {
     this.petPictures,
     // this.petProfileScans,
     // this.tag,
-    this.hideContacts,
-    this.behaviourInformation,
-    this.medicalInformation,
+    this.hide_contacts,
+    this.pet_behavioral_notes,
+    this.pet_diet_preferences,
+    this.pet_favorite_activities,
+    this.pet_favorite_toys,
+    this.pet_licenceID,
+    this.pet_special_needs,
+    this.pet_tattooID,
+    this.scan_hide_contacts,
+    this.scan_hide_description,
+    this.scan_hide_documents,
+    this.scan_hide_information,
+    this.scan_hide_medical,
+    this.scan_hide_pictures,
+    this.hide_description,
+    this.hide_documents,
+    this.hide_information,
+    this.hide_medical,
+    this.hide_pictures,
+    this.description,
   );
 
   PetProfileDetails.fromJson(Map<String, dynamic> json)
       : profileId = json['profile_id'],
+        description = json['description'],
         profileCreationDateTime =
             DateTime.parse(json['profile_creation_DateTime']),
         petName = json['pet_name'],
@@ -103,7 +141,18 @@ class PetProfileDetails {
         //         .toList()
         //     : [],
         petIsLostText = json['pet_is_lost_text'],
-        hideContacts = json['hide_contacts'],
+        scan_hide_contacts = json['scan_hide_contacts'],
+        scan_hide_information = json['scan_hide_information'],
+        scan_hide_medical = json['scan_hide_medical'],
+        scan_hide_pictures = json['scan_hide_pictures'],
+        scan_hide_documents = json['scan_hide_documents'],
+        scan_hide_description = json['scan_hide_description'],
+        hide_contacts = json['hide_contacts'],
+        hide_information = json['hide_information'],
+        hide_medical = json['hide_medical'],
+        hide_pictures = json['hide_pictures'],
+        hide_documents = json['hide_documents'],
+        hide_description = json['hide_description'],
         petContacts = json['Contact'] != null
             ? (json['Contact'] as List).map((t) => Contact.fromJson(t)).toList()
             : [],
@@ -117,18 +166,21 @@ class PetProfileDetails {
                 .map((t) => PetPicture.fromJson(t))
                 .toList()
             : [],
-        behaviourInformation =
-            BehaviourInformation.fromJson(json['BehaviourInformation']),
-        medicalInformation =
-            MedicalInformation.fromJson(json['MedicalInformation']);
-  // petProfileScans = json['pet_profile_scans'] != null
-  //     ? (json['pet_profile_scans'] as List)
-  //         .map((t) => Scan.fromJson(t))
-  //         .toList()
-  //     : [],
-  // tag = json['Tag'] != null
-  //     ? (json['Tag'] as List).map((t) => Tag.fromJson(t)).toList()
-  //     : [];
+        // petProfileScans = json['pet_profile_scans'] != null
+        //     ? (json['pet_profile_scans'] as List)
+        //         .map((t) => Scan.fromJson(t))
+        //         .toList()
+        //     : [],
+        // tag = json['Tag'] != null
+        //     ? (json['Tag'] as List).map((t) => Tag.fromJson(t)).toList()
+        //     : [],
+        pet_tattooID = json['pet_tattooID'],
+        pet_licenceID = json['pet_licenceID'],
+        pet_favorite_toys = json['pet_favorite_toys'],
+        pet_favorite_activities = json['pet_favorite_activities'],
+        pet_behavioral_notes = json['pet_behavioral_notes'],
+        pet_special_needs = json['pet_special_needs'],
+        pet_diet_preferences = json['pet_diet_preferences'];
 
   //New PetProfileDetails Object for creatring new Profile
   // PetProfileDetails.createNewEmptyProfile(this.tag)
@@ -154,6 +206,7 @@ class PetProfileDetails {
   Map<String, dynamic> toJson() => {
         'profile_id': profileId,
         'pet_name': petName,
+        'description': description,
         'pet_gender': parseStringFromGender(petGender),
         'pet_chip_id': petChipId,
         // 'pet_owner_name': petOwnerName,
@@ -162,7 +215,28 @@ class PetProfileDetails {
         // 'pet_owner_facebook': petOwnerFacebook,
         // 'pet_owner_instagram': petOwnerInstagram,
         'pet_is_Lost': petIsLost,
-        'pet_is_lost_text': petIsLostText
+        'pet_is_lost_text': petIsLostText,
+        'pet_tattooID': pet_tattooID,
+        'pet_licenceID': pet_licenceID,
+        'pet_favorite_toys': pet_favorite_toys,
+        'pet_favorite_activities': pet_favorite_activities,
+        'pet_behavioral_notes': pet_behavioral_notes,
+        'pet_special_needs': pet_special_needs,
+        'pet_diet_preferences': pet_diet_preferences,
+
+        'hide_contacts': hide_contacts,
+        'hide_information': hide_information,
+        'hide_medical': hide_medical,
+        'hide_pictures': hide_pictures,
+        'hide_documents': hide_documents,
+        'hide_description': hide_description,
+
+        'scan_hide_contacts': scan_hide_contacts,
+        'scan_hide_information': scan_hide_information,
+        'scan_hide_medical': scan_hide_medical,
+        'scan_hide_pictures': scan_hide_pictures,
+        'scan_hide_documents': scan_hide_documents,
+        'scan_hide_description': scan_hide_description,
       };
 }
 

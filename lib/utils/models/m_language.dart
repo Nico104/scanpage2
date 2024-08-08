@@ -45,22 +45,22 @@ bool listContainsLanguage(List<Language> list, Language language) {
 //   return null;
 // }
 
-class Country {
-  final String countryKey;
-  final String countryFlagImagePath;
-  final String countryPhonePrefix;
-  final Language language;
+// class Country {
+//   final String countryKey;
+//   final String countryFlagImagePath;
+//   final String countryPhonePrefix;
+//   final Language language;
 
-  Country(
-    this.countryKey,
-    this.countryFlagImagePath,
-    this.countryPhonePrefix,
-    this.language,
-  );
+//   Country(
+//     this.countryKey,
+//     this.countryFlagImagePath,
+//     this.countryPhonePrefix,
+//     this.language,
+//   );
 
-  Country.fromJson(Map<String, dynamic> json)
-      : countryKey = json['country_key'],
-        countryFlagImagePath = json['country_flag_image_path'],
-        countryPhonePrefix = json['country_phone_prefix'],
-        language = Language.fromJson(json['country_language']);
-}
+//   Country.fromJson(Map<String, dynamic> json)
+//       : countryKey = json['country_key'],
+//         countryFlagImagePath = json['country_flag_image_path'],
+//         countryPhonePrefix = json['country_phone_prefix'],
+//         language = Language.fromJson(json['country_language']);
+// }

@@ -1,1 +1,9 @@
-{}
+{
+  "projects": {
+    "default": "scanpagetest",
+    "sharepage": "thatsmydog-ff655"
+  },
+  "targets": {},
+  "etags": {},
+  "dataconnectEmulatorConfig": {}
+}

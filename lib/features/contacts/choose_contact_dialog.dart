@@ -29,10 +29,12 @@ class ChoosePhoneNumber extends StatelessWidget {
       itemBuilder: (context, index) {
         return InkWell(
           onTap: () {
+            // final Uri toLaunch = Uri(
+            //     scheme: 'tel',
+            //     host: phoneNumbers.elementAt(index).country.countryPhonePrefix +
+            //         phoneNumbers.elementAt(index).phoneNumber);
             final Uri toLaunch = Uri(
-                scheme: 'tel',
-                host: phoneNumbers.elementAt(index).country.countryPhonePrefix +
-                    phoneNumbers.elementAt(index).phoneNumber);
+                scheme: 'tel', host: phoneNumbers.elementAt(index).phoneNumber);
             launchUrl(toLaunch);
           },
           child: Padding(
@@ -45,7 +47,8 @@ class ChoosePhoneNumber extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "${phoneNumbers.elementAt(index).country.countryPhonePrefix} ${phoneNumbers.elementAt(index).phoneNumber}",
+                      // "${phoneNumbers.elementAt(index).country.countryPhonePrefix} ${phoneNumbers.elementAt(index).phoneNumber}",
+                      "${phoneNumbers.elementAt(index).phoneNumber}",
                       style: GoogleFonts.openSans(
                         fontSize: 22,
                         fontWeight: FontWeight.normal,

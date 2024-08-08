@@ -33,10 +33,15 @@ class BehItem extends StatelessWidget {
                 ),
                 Text(
                   subtitle,
-                  style: GoogleFonts.prompt(
-                    fontWeight: FontWeight.normal,
-                    fontSize: 16,
-                    color: HexColor("#8A7861"),
+                  // style: GoogleFonts.prompt(
+                  //   fontWeight: FontWeight.normal,
+                  //   fontSize: 16,
+                  //   color: HexColor("#8A7861"),
+                  // ),
+                  style: GoogleFonts.openSans(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 18,
+                    color: Colors.black.withOpacity(0.45),
                   ),
                 ),
               ],
