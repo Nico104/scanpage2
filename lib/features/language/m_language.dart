@@ -1,4 +1,6 @@
-// import 'package:userapp/feature/pets/profile_details/g_profile_detail_globals.dart';
+import 'dart:ui';
+
+import 'package:scanpage/utils/utils_general.dart';
 
 class Language {
   final String languageLabel;
@@ -27,6 +29,10 @@ class Language {
             json['language_isAvailableForAppTranslation'];
 }
 
+String getDeviceLanguage() {
+  return window.locale.languageCode;
+}
+
 bool listContainsLanguage(List<Language> list, Language language) {
   for (Language item in list) {
     if (item.languageKey == language.languageKey) {
@@ -36,31 +42,28 @@ bool listContainsLanguage(List<Language> list, Language language) {
   return false;
 }
 
-// Language? getLanguageFromKey(String languageKey) {
-//   for (var element in availableLanguages) {
-//     if (element.languageKey == languageKey) {
-//       return element;
-//     }
-//   }
-//   return null;
-// }
+Language? getLanguageFromKey(String languageKey) {
+  for (var element in availableLanguages) {
+    if (element.languageKey == languageKey) {
+      return element;
+    }
+  }
+  return null;
+}
 
-// class Country {
-//   final String countryKey;
-//   final String countryFlagImagePath;
-//   final String countryPhonePrefix;
-//   final Language language;
+class Country {
+  final String name;
+  final String code;
+  final String dial_code;
 
-//   Country(
-//     this.countryKey,
-//     this.countryFlagImagePath,
-//     this.countryPhonePrefix,
-//     this.language,
-//   );
+  Country(
+    this.name,
+    this.code,
+    this.dial_code,
+  );
 
-//   Country.fromJson(Map<String, dynamic> json)
-//       : countryKey = json['country_key'],
-//         countryFlagImagePath = json['country_flag_image_path'],
-//         countryPhonePrefix = json['country_phone_prefix'],
-//         language = Language.fromJson(json['country_language']);
-// }
+  Country.fromJson(Map<String, dynamic> json)
+      : name = json['name'],
+        code = json['code'],
+        dial_code = json['dial_code'];
+}

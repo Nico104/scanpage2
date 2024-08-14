@@ -17,7 +17,7 @@ class DescriptionSection extends StatelessWidget {
       children: [
         const SizedBox(height: 16),
         SectionTitle(
-          title: "Description".tr(),
+          title: "sp_PetScreen_Titles_Description".tr(),
         ),
         const SizedBox(height: 16),
         Text(

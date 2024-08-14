@@ -42,10 +42,10 @@ class PetPictureExpanded extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(22),
                     child: Image.network(
-                        // s3BaseUrl + picture.petPictureLink,
-                        "https://picsum.photos/800"
-                        // 'fit: BoxFit.contain,
-                        ),
+                      s3BaseUrl + picture!.petPictureLink,
+                      // "https://picsum.photos/800"
+                      // 'fit: BoxFit.contain,
+                    ),
                   ),
                 ),
               ),

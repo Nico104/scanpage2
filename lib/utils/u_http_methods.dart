@@ -1,21 +1,26 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:scanpage/features/language/m_language.dart';
 import 'package:scanpage/utils/models/m_behaviour_information.dart';
 import '../general/network_globals.dart';
 import 'models/m_pet_profile.dart';
 
 Future<PetProfileDetails> getPetFromScan(String code,
-    {bool scanned = false}) async {
+    {bool scanned = false, bool notification = false}) async {
+  //TODO temporary solution
+  scanned = true;
+
   Uri url = Uri.parse('$baseURL/pet/getPetFromScan/$code');
 
+  print(code);
   final response = await http.get(url);
 
-  print(response.statusCode);
+  print(response.body);
   if (response.statusCode == 200) {
     PetProfileDetails pet =
         PetProfileDetails.fromJson(jsonDecode(response.body));
     if (scanned) {
-      createNewScan(pet.profileId);
+      createNewScan(pet.profileId, notification: notification);
     }
     return pet;
   } else {
@@ -40,7 +45,8 @@ Future<PetProfileDetails> getPetFromId(
   }
 }
 
-Future<void> createNewScan(int petProfileId) async {
+Future<void> createNewScan(int petProfileId,
+    {bool notification = false}) async {
   Uri url = Uri.parse('$baseURL/scan/createScan');
 
   print("yo");
@@ -55,6 +61,7 @@ Future<void> createNewScan(int petProfileId) async {
     body: jsonEncode(
       {
         'petProfileId': petProfileId,
+        'notification': notification,
       },
     ),
   );
@@ -98,4 +105,16 @@ Future<void> sendContactInformation(
       },
     ),
   );
+}
+
+Future<List<Language>> fetchAvailableLanguages() async {
+  final response = await http.get(Uri.parse('$baseURL/pet/getLanguages'));
+
+  if (response.statusCode == 200) {
+    return (jsonDecode(response.body) as List)
+        .map((t) => Language.fromJson(t))
+        .toList();
+  } else {
+    throw Exception('Failed to load Languages');
+  }
 }

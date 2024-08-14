@@ -44,7 +44,7 @@ class _PicturesPageState extends State<PicturesPage> {
   Widget getNoPicturesWidget() {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Pictures"),
+        title: Text("sp_PicturePage_Title".tr()),
       ),
       body: Column(
         children: [
@@ -52,12 +52,12 @@ class _PicturesPageState extends State<PicturesPage> {
           Image.asset("assets/tmp/dog_bowl.png"),
           const SizedBox(height: 8),
           Text(
-            "It looks quite empty in here",
+            "sp_PicturePage_NoPictures_FunnyInfo",
             style: Theme.of(context).textTheme.titleMedium,
           ),
           const SizedBox(height: 8),
           Text(
-            "picturesPage_noPictures".tr(),
+            "sp_PicturePage_NoPictures".tr(),
             style: Theme.of(context).textTheme.labelMedium,
             textAlign: TextAlign.center,
           ),
@@ -90,7 +90,7 @@ class _PicturesPageState extends State<PicturesPage> {
               //     });
               //   },
               // ),
-              title: Text("picturesPage_Title".tr()),
+              title: Text("sp_PicturePage_Title".tr()),
               // actions: [
               //   Icon(Icons.close_rounded),
               // ],

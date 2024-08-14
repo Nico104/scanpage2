@@ -85,7 +85,7 @@ class _SendLocationDialogState extends State<SendLocationDialog> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Resend Location".tr(),
+                      "sp_sendLocationDialog_ResendTitle".tr(),
                       style: GoogleFonts.openSans(
                         fontWeight: FontWeight.w600,
                         fontSize: 16,
@@ -93,7 +93,7 @@ class _SendLocationDialogState extends State<SendLocationDialog> {
                       ),
                     ),
                     Text(
-                      "Send my GPS Location".tr(),
+                      "sp_sendLocationDialog_ResendInfo".tr(),
                       style: GoogleFonts.prompt(
                         fontWeight: FontWeight.normal,
                         fontSize: 14,
@@ -171,9 +171,10 @@ class _SendLocationDialogState extends State<SendLocationDialog> {
                     showDialog(
                       context: context,
                       builder: (_) => SendContactDialog(
-                        title: "Enter your Phone Number",
-                        hint: "+39 111 111 1111".tr(),
-                        confirmLabel: "Send".tr(),
+                        title: "sp_sendLocationDialog_EnterPhoneNumber".tr(),
+                        hint: "+39 111 111 1111",
+                        confirmLabel:
+                            "sp_sendLocationDialog_SendContactInfo".tr(),
                         textInputType: TextInputType.phone,
                       ),
                     ).then((value) async {

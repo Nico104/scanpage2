@@ -7,6 +7,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:scanpage/features/features/description_section.dart';
 import 'package:scanpage/features/features/information_page.dart';
 import 'package:scanpage/features/features/information_section.dart';
+import 'package:scanpage/features/language/language_selector.dart';
+import 'package:scanpage/features/language/m_language.dart';
 import 'package:scanpage/general/network_globals.dart';
 import 'package:scanpage/utils/models/m_pet_profile.dart';
 import 'package:scanpage/utils/utils_general.dart';
@@ -45,7 +47,7 @@ class _PetScreenState extends State<PetScreen> {
 
   String getProfilePictureLink() {
     if (widget.petProfileDetails.petPictures.isNotEmpty &&
-        !widget.petProfileDetails.hide_contacts) {
+        !widget.petProfileDetails.hide_pictures) {
       return s3BaseUrl +
           widget.petProfileDetails.petPictures.first.petPictureLink;
     }
@@ -114,8 +116,49 @@ class _PetScreenState extends State<PetScreen> {
                           child: Column(
                             children: [
                               const SizedBox(height: 46),
+                              InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => LanguageSelector(
+                                        activeLanguage: getLanguageFromKey(
+                                            context.locale.toString())!,
+                                        unavailableLanguages: const [],
+                                        availableLanguages: availableLanguages,
+                                        title: "appBarLangaugeSettings".tr(),
+                                        heroTag: "settingsLang",
+                                      ),
+                                    ),
+                                  ).then((value) async {
+                                    if (value is Language) {
+                                      await context
+                                          .setLocale(Locale(value.languageKey));
+                                      //Wait otherwise Language doesnt update .tr()
+                                      await Future.delayed(
+                                          const Duration(milliseconds: 125));
+                                      setState(() {});
+                                    }
+                                  });
+                                },
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "Change Language",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .labelMedium,
+                                    ),
+                                    const SizedBox(width: 12),
+                                    Icon(Icons.keyboard_arrow_down_rounded)
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(height: 22),
                               Text(
-                                "Hello! I am",
+                                "sp_Title".tr(),
                                 style: GoogleFonts.openSans(
                                   fontSize: 22,
                                   fontWeight: FontWeight.w400,
@@ -133,7 +176,7 @@ class _PetScreenState extends State<PetScreen> {
                               ),
                               const SizedBox(height: 28),
                               Text(
-                                "If you found me without my owner consider calling or sending my positions with the buttons below.",
+                                "sp_FoundMeInformation".tr(),
                                 style: GoogleFonts.openSans(
                                   fontWeight: FontWeight.w400,
                                   fontSize: 16,
@@ -157,38 +200,38 @@ class _PetScreenState extends State<PetScreen> {
                                       ],
                                     ),
                               const SizedBox(height: 28),
-                              Text(
-                                "Lorem lorem lorem ipsum",
-                                style: GoogleFonts.openSans(
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 16,
-                                  color: Colors.black.withOpacity(0.9),
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
-                              const SizedBox(height: 28),
+                              // Text(
+                              //   "Lorem lorem lorem ipsum",
+                              //   style: GoogleFonts.openSans(
+                              //     fontWeight: FontWeight.w400,
+                              //     fontSize: 16,
+                              //     color: Colors.black.withOpacity(0.9),
+                              //   ),
+                              //   textAlign: TextAlign.center,
+                              // ),
+                              // const SizedBox(height: 28),
                               Column(
                                 children: [
                                   MenuBox(
-                                    title: "Information",
+                                    title: "sp_fastNavInformation".tr(),
                                     onTap: () => jumpToSection(1),
                                     hide: widget
                                         .petProfileDetails.hide_information,
                                   ),
                                   MenuBox(
-                                    title: "Contacts",
+                                    title: "sp_fastNavContacts".tr(),
                                     onTap: () => jumpToSection(2),
                                     hide:
                                         widget.petProfileDetails.hide_contacts,
                                   ),
                                   MenuBox(
-                                    title: "Pictures",
+                                    title: "sp_fastNavPictures".tr(),
                                     onTap: () => jumpToSection(3),
                                     hide:
                                         widget.petProfileDetails.hide_pictures,
                                   ),
                                   MenuBox(
-                                    title: "Documents",
+                                    title: "sp_fastNavDocuments".tr(),
                                     onTap: () => jumpToSection(4),
                                     hide:
                                         widget.petProfileDetails.hide_documents,
@@ -200,7 +243,7 @@ class _PetScreenState extends State<PetScreen> {
                                   : Padding(
                                       padding: const EdgeInsets.only(top: 16),
                                       child: Text(
-                                        "To make navigating my profile easier for you we added buttons so you can jump to whatever you are looking for",
+                                        "sp_fastNavInfo".tr(),
                                         style: GoogleFonts.openSans(
                                           fontWeight: FontWeight.w400,
                                           fontSize: 16,
@@ -242,7 +285,8 @@ class _PetScreenState extends State<PetScreen> {
                                         const SizedBox(height: 32),
                                         SectionTitle(
                                           key: keyCap.elementAt(2),
-                                          title: "Pictures".tr(),
+                                          title: "sp_PetScreen_Titles_Pictures"
+                                              .tr(),
                                         ),
                                         const SizedBox(height: 24),
                                         Pictures(
@@ -258,7 +302,8 @@ class _PetScreenState extends State<PetScreen> {
                                         const SizedBox(height: 32),
                                         SectionTitle(
                                           key: keyCap.elementAt(3),
-                                          title: "Documents".tr(),
+                                          title: "sp_PetScreen_Titles_Documents"
+                                              .tr(),
                                         ),
                                         const SizedBox(height: 24),
                                         DocumentsList(
@@ -267,14 +312,14 @@ class _PetScreenState extends State<PetScreen> {
                                         ),
                                       ],
                                     ),
-                              Padding(
-                                padding: const EdgeInsets.all(16),
-                                child: Text(
-                                  "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod",
-                                  style: Theme.of(context).textTheme.labelSmall,
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
+                              // Padding(
+                              //   padding: const EdgeInsets.all(16),
+                              //   child: Text(
+                              //     "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod",
+                              //     style: Theme.of(context).textTheme.labelSmall,
+                              //     textAlign: TextAlign.center,
+                              //   ),
+                              // ),
                             ],
                           ),
                         ),

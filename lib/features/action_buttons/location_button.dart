@@ -30,7 +30,7 @@ class LocationButton extends StatelessWidget {
       // Location services are not enabled don't continue
       // accessing the position and request users of the
       // App to enable the location services.
-      return Future.error('Location services are disabled.');
+      return Future.error("sp_Location_ServicesDisabledError".tr());
     }
 
     permission = await Geolocator.checkPermission();
@@ -38,8 +38,7 @@ class LocationButton extends StatelessWidget {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
         toastification.show(
-          title: Text(
-              'Please verify we are allowed to access your Location service'),
+          title: Text("sp_Location_askAllowLocation".tr()),
           autoCloseDuration: const Duration(seconds: 6),
         );
         // Permissions are denied, next time you could try
@@ -47,19 +46,17 @@ class LocationButton extends StatelessWidget {
         // Android's shouldShowRequestPermissionRationale
         // returned true. According to Android guidelines
         // your App should show an explanatory UI now.
-        return Future.error('Location permissions are denied');
+        return Future.error("sp_Location_PermissionDeniedError".tr());
       }
     }
 
     if (permission == LocationPermission.deniedForever) {
       toastification.show(
-        title: Text(
-            'Your Location Service seems to be off or our service blocked. Please verify your Gps Location Settig is turned on and your Browser is not blocking us'),
+        title: Text("sp_Location_ServiceOffOrBlocked".tr()),
         autoCloseDuration: const Duration(seconds: 10),
       );
       // Permissions are denied forever, handle appropriately.
-      return Future.error(
-          'Location permissions are permanently denied, we cannot request permissions.');
+      return Future.error("sp_Location_PermanentlyDeniedError".tr());
     }
 
     // When we reach here, permissions are granted and we can

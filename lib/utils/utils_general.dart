@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:scanpage/features/language/m_language.dart';
+
+List<Language> availableLanguages = List.empty(growable: false);
 
 void navigatePerSlide(BuildContext context, Widget naviagteTo,
     {int durationMilliseconds = 125, VoidCallback? callback}) {

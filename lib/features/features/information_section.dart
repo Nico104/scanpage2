@@ -46,7 +46,7 @@ class _InformationSectionState extends State<InformationSection> {
                   const SizedBox(height: 28),
                   const SizedBox(height: 8),
                   SectionTitle(
-                    title: "Information".tr(),
+                    title: "sp_PetScreen_Titles_Information".tr(),
                   ),
                   const SizedBox(height: 8),
                 ],

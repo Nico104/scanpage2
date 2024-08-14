@@ -3,6 +3,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:scanpage/features/homepage/look_for_tag.dart';
 import 'package:scanpage/init_page_share.dart';
+import 'package:scanpage/utils/u_http_methods.dart';
+import 'package:scanpage/utils/utils_general.dart';
 import 'package:scanpage/utils/utils_theme/theme_provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:provider/provider.dart';
@@ -74,12 +76,14 @@ Future<void> main() async {
     app: MyApp(),
   );
 
+  availableLanguages = await fetchAvailableLanguages();
+
   runApp(
     EasyLocalization(
       supportedLocales: const [
         Locale('en'),
-        // Locale('de'),
-        // Locale('it'),
+        Locale('de'),
+        Locale('it'),
         // Locale('hu'),
         // Locale('no'),
         // Locale('fr'),
@@ -102,83 +106,83 @@ Future<void> main() async {
 
 class MyApp extends StatelessWidget {
   //ScanPage
-  // final routerDelegate = BeamerDelegate(
-  //   locationBuilder: RoutesLocationBuilder(
-  //     routes: {
-  //       // Return either Widgets or BeamPages if more customization is needed
-  //       '/': (context, state, data) => const BeamPage(
-  //             key: ValueKey('book-'),
-  //             title: 'A Book',
-  //             popToNamed: '/',
-  //             type: BeamPageType.scaleTransition,
-  //             // child: InitPage(
-  //             //   code: "1111111111111111",
-  //             // ),
-  //             child: LookForTag(),
-  //           ),
-  //       '/:bookId': (context, state, data) {
-  //         String code = state.pathParameters['bookId']!;
-  //         bool scanned = code.endsWith('1');
-
-  //         code = code.substring(0, code.length - 1);
-  //         print("code" + code);
-
-  //         return BeamPage(
-  //           key: ValueKey('book-$code'),
-  //           title: 'A Book #$code',
-  //           popToNamed: '/',
-  //           type: BeamPageType.scaleTransition,
-  //           // child: Scaffold(
-  //           //   body: Text(bookId),
-  //           // ),
-  //           child: InitPage(
-  //             code: code,
-  //             scanned: scanned,
-  //           ),
-  //         );
-  //       }
-  //     },
-  //   ),
-  // );
-
-  //SharePage
   final routerDelegate = BeamerDelegate(
     locationBuilder: RoutesLocationBuilder(
       routes: {
-        // // Return either Widgets or BeamPages if more customization is needed
-        // '/': (context, state, data) => const BeamPage(
-        //       key: ValueKey('book-'),
-        //       title: 'A Book',
-        //       popToNamed: '/',
-        //       type: BeamPageType.scaleTransition,
-        //       // child: InitPage(
-        //       //   code: "1111111111111111",
-        //       // ),
-        //       child: LookForTag(),
-        //     ),
+        // Return either Widgets or BeamPages if more customization is needed
+        '/': (context, state, data) => const BeamPage(
+              key: ValueKey('book-'),
+              title: 'A Book',
+              popToNamed: '/',
+              type: BeamPageType.scaleTransition,
+              // child: InitPage(
+              //   code: "1111111111111111",
+              // ),
+              child: LookForTag(),
+            ),
         '/:bookId': (context, state, data) {
-          String id = state.pathParameters['bookId']!;
-          // bool scanned = code.endsWith('1');
+          String code = state.pathParameters['bookId']!;
+          bool scanned = code.endsWith('1');
 
           // code = code.substring(0, code.length - 1);
-          // print("code" + code);
+          print("code" + code);
 
           return BeamPage(
-            key: ValueKey('book-$id'),
-            title: 'A Book #$id',
+            key: ValueKey('book-$code'),
+            title: 'A Book #$code',
             popToNamed: '/',
             type: BeamPageType.scaleTransition,
             // child: Scaffold(
             //   body: Text(bookId),
             // ),
-            child: InitPageShare(
-              id: id,
+            child: InitPage(
+              code: code,
+              scanned: true,
             ),
           );
         }
       },
     ),
   );
+
+  //SharePage
+  // final routerDelegate = BeamerDelegate(
+  //   locationBuilder: RoutesLocationBuilder(
+  //     routes: {
+  //       // // Return either Widgets or BeamPages if more customization is needed
+  //       // '/': (context, state, data) => const BeamPage(
+  //       //       key: ValueKey('book-'),
+  //       //       title: 'A Book',
+  //       //       popToNamed: '/',
+  //       //       type: BeamPageType.scaleTransition,
+  //       //       // child: InitPage(
+  //       //       //   code: "1111111111111111",
+  //       //       // ),
+  //       //       child: LookForTag(),
+  //       //     ),
+  //       '/:bookId': (context, state, data) {
+  //         String id = state.pathParameters['bookId']!;
+  //         // bool scanned = code.endsWith('1');
+
+  //         // code = code.substring(0, code.length - 1);
+  //         // print("code" + code);
+
+  //         return BeamPage(
+  //           key: ValueKey('book-$id'),
+  //           title: 'A Book #$id',
+  //           popToNamed: '/',
+  //           type: BeamPageType.scaleTransition,
+  //           // child: Scaffold(
+  //           //   body: Text(bookId),
+  //           // ),
+  //           child: InitPageShare(
+  //             id: id,
+  //           ),
+  //         );
+  //       }
+  //     },
+  //   ),
+  // );
 
   //END
 

@@ -29,7 +29,10 @@ class _SinglePictureState extends State<SinglePicture> {
   @override
   Widget build(BuildContext context) {
     print(widget.imageUrl);
-    return CachedNetworkImage(imageUrl: widget.imageUrl);
+    return CachedNetworkImage(
+      imageUrl: widget.imageUrl,
+      fit: BoxFit.cover,
+    );
     return Image.network(
       // "https://picsum.photos/200/300",
       widget.imageUrl,

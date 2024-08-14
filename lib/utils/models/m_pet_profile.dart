@@ -1,6 +1,9 @@
 // import 'package:userapp/feature/pets/profile_details/models/m_contact.dart';
 
+import 'package:scanpage/features/behaviour/beh_info.dart';
+import 'package:scanpage/utils/models/m_behaviour_information.dart';
 import 'package:scanpage/utils/models/m_contact.dart';
+import 'package:scanpage/utils/models/medical/m_medical_information.dart';
 
 import 'm_description.dart';
 import 'm_document.dart';
@@ -16,7 +19,7 @@ class PetProfileDetails {
   String petName;
   Gender petGender;
   String? petChipId;
-  List<Description> petDescription;
+  // List<Description> petDescription;
   String petIsLostText;
   // ImportantInformation petImportantInformation;
   // String? petOwnerName;
@@ -51,6 +54,8 @@ class PetProfileDetails {
   bool hide_documents;
   bool hide_description;
   String description;
+  MedicalInformation medicalInformation;
+  BehaviourInformation behaviourInformation;
 
   // PetProfileDetails clone() => PetProfileDetails(
   //       profileId,
@@ -87,7 +92,7 @@ class PetProfileDetails {
     // this.petOwnerInstagram,
     this.petContacts,
     this.petIsLost,
-    this.petDescription,
+    // this.petDescription,
     this.petIsLostText,
     // this.petOwnerTelephoneNumbers,
     this.petDocuments,
@@ -114,6 +119,8 @@ class PetProfileDetails {
     this.hide_medical,
     this.hide_pictures,
     this.description,
+    this.medicalInformation,
+    this.behaviourInformation,
   );
 
   PetProfileDetails.fromJson(Map<String, dynamic> json)
@@ -130,16 +137,20 @@ class PetProfileDetails {
         // petOwnerFacebook = json['pet_owner_facebook'],
         // petOwnerInstagram = json['pet_owner_instagram'],
         petIsLost = json['pet_is_Lost'],
-        petDescription = json['pet_description'] != null
-            ? (json['pet_description'] as List)
-                .map((t) => Description.fromJson(t))
-                .toList()
-            : [],
+        // petDescription = json['pet_description'] != null
+        //     ? (json['pet_description'] as List)
+        //         .map((t) => Description.fromJson(t))
+        //         .toList()
+        //     : [],
         // petImportantInformation = json['pet_important_information'] != null
         //     ? (json['pet_important_information'] as List)
         //         .map((t) => ImportantInformation.fromJson(t))
         //         .toList()
         //     : [],
+        medicalInformation =
+            MedicalInformation.fromJson(json['MedicalInformation']),
+        behaviourInformation =
+            BehaviourInformation.fromJson(json['BehaviourInformation']),
         petIsLostText = json['pet_is_lost_text'],
         scan_hide_contacts = json['scan_hide_contacts'],
         scan_hide_information = json['scan_hide_information'],

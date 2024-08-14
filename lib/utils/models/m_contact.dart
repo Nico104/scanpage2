@@ -1,4 +1,5 @@
-import 'm_language.dart';
+import 'package:scanpage/features/language/m_language.dart';
+
 import 'm_phone_number.dart';
 
 class Contact {

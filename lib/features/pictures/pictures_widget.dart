@@ -92,14 +92,14 @@ class _PicturesState extends State<Pictures> {
                                 color: Colors.black.withOpacity(0.7),
                               ),
                             ),
-                            Text(
-                              "more",
-                              style: GoogleFonts.openSans(
-                                fontSize: 26,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.black.withOpacity(0.7),
-                              ),
-                            ),
+                            // Text(
+                            //   "more",
+                            //   style: GoogleFonts.openSans(
+                            //     fontSize: 26,
+                            //     fontWeight: FontWeight.w500,
+                            //     color: Colors.black.withOpacity(0.7),
+                            //   ),
+                            // ),
                           ],
                         ),
                       ),

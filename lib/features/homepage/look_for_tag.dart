@@ -33,7 +33,7 @@ class _LookForTagState extends State<LookForTag> {
                 flex: 1,
               ),
               Text(
-                'Who am I?',
+                "sp_LookForTag_Title".tr(),
                 style: GoogleFonts.prompt(
                   fontSize: 22,
                   color: Colors.black87,
@@ -57,7 +57,7 @@ class _LookForTagState extends State<LookForTag> {
               ),
               const Spacer(flex: 2),
               Text(
-                'Usage Instructions\n1. Locate the Code: Refer to the illustration to find the code on your tag.\n2. Enter the Code: Type the code into the input field labeled "Enter Code."\n3. Submit: Click the "Search" button to proceed.\n\nYour assistance is greatly appreciated!',
+                "sp_LookForTag_Instructions".tr(),
                 style: GoogleFonts.roboto(
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
@@ -69,7 +69,7 @@ class _LookForTagState extends State<LookForTag> {
                 flex: 2,
               ),
               Text(
-                'Enter the Code found on the back of this Tag',
+                "sp_LookForTag_EnterCode".tr(),
                 style: GoogleFonts.roboto(
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
@@ -80,6 +80,7 @@ class _LookForTagState extends State<LookForTag> {
                 flex: 1,
               ),
               CustomTextFormField(
+                maxLines: 1,
                 // controller: _controller,
                 // decoration: InputDecoration(
                 //   hintText: 'Enter Code',
@@ -111,14 +112,14 @@ class _LookForTagState extends State<LookForTag> {
                   String code = text;
                   bool scanned = code.endsWith('1');
 
-                  code = code.substring(0, code.length - 1);
+                  // code = code.substring(0, code.length - 1);
                   print("codE" + code);
 
                   navigatePerSlide(
                     context,
                     InitPage(
                       code: code,
-                      scanned: scanned,
+                      scanned: true,
                     ),
                   );
                 },
@@ -140,7 +141,7 @@ class _LookForTagState extends State<LookForTag> {
               ),
               const Spacer(flex: 2),
               Text(
-                'If the Page doesnt work contact us email@email.com',
+                "sp_LookForTag_ContactIfFailure".tr() + 'email@email.com',
                 style: GoogleFonts.roboto(
                   fontSize: 14,
                   fontWeight: FontWeight.w400,

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:scanpage/features/contacts/choose_contact_dialog.dart';
 import 'package:scanpage/features/contacts/contact_dialog.dart';
+import 'package:scanpage/features/language/m_language.dart';
 import 'package:scanpage/general/hex_color.dart';
 import 'package:scanpage/utils/models/m_phone_number.dart';
 import 'package:scanpage/utils/widgets/custom_nico_modal.dart';
@@ -11,7 +12,6 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../utils/models/m_contact.dart';
-import '../../utils/models/m_language.dart';
 
 class ContactItem extends StatelessWidget {
   const ContactItem({super.key, required this.contact});
