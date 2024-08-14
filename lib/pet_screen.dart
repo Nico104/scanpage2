@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:scanpage/features/features/description_section.dart';
 import 'package:scanpage/features/features/information_page.dart';
 import 'package:scanpage/features/features/information_section.dart';
+import 'package:scanpage/features/language/change_language_widget.dart';
 import 'package:scanpage/features/language/language_selector.dart';
 import 'package:scanpage/features/language/m_language.dart';
 import 'package:scanpage/general/network_globals.dart';
@@ -116,46 +117,7 @@ class _PetScreenState extends State<PetScreen> {
                           child: Column(
                             children: [
                               const SizedBox(height: 46),
-                              InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => LanguageSelector(
-                                        activeLanguage: getLanguageFromKey(
-                                            context.locale.toString())!,
-                                        unavailableLanguages: const [],
-                                        availableLanguages: availableLanguages,
-                                        title: "appBarLangaugeSettings".tr(),
-                                        heroTag: "settingsLang",
-                                      ),
-                                    ),
-                                  ).then((value) async {
-                                    if (value is Language) {
-                                      await context
-                                          .setLocale(Locale(value.languageKey));
-                                      //Wait otherwise Language doesnt update .tr()
-                                      await Future.delayed(
-                                          const Duration(milliseconds: 125));
-                                      setState(() {});
-                                    }
-                                  });
-                                },
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      "Change Language",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .labelMedium,
-                                    ),
-                                    const SizedBox(width: 12),
-                                    Icon(Icons.keyboard_arrow_down_rounded)
-                                  ],
-                                ),
-                              ),
+                              const ChangeLanguageWidget(),
                               const SizedBox(height: 22),
                               Text(
                                 "sp_Title".tr(),

@@ -54,5 +54,6 @@
     "sp_LookForTag_ContactIfFailure": "If the Page doesnt work contact us under - ",
     "sp_PicturePage_Title": "Pictures",
     "sp_PicturePage_NoPictures_FunnyInfo": "It looks quite empty in here",
-    "sp_PicturePage_NoPictures": "No Pictures yet"
+    "sp_PicturePage_NoPictures": "No Pictures yet",
+    "change_Language_Label": "Change Language"
 }

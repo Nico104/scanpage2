@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:scanpage/features/language/change_language_widget.dart';
 import 'package:scanpage/init_page.dart';
 import 'package:scanpage/utils/utils_general.dart';
 import 'package:scanpage/utils/utils_theme/custom_colors.dart';
@@ -55,6 +56,8 @@ class _LookForTagState extends State<LookForTag> {
                   ),
                 ),
               ),
+              const Spacer(flex: 2),
+              const ChangeLanguageWidget(),
               const Spacer(flex: 2),
               Text(
                 "sp_LookForTag_Instructions".tr(),
