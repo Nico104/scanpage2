@@ -6,6 +6,7 @@ import 'package:scanpage/features/behaviour/beh_item.dart';
 import 'package:scanpage/pet_screen.dart';
 import 'package:scanpage/utils/models/m_behaviour_information.dart';
 import 'package:scanpage/utils/models/m_pet_profile.dart';
+import 'package:scanpage/utils/utils_general.dart';
 import 'package:scanpage/utils/widgets/custom_scroll_view.dart';
 import 'package:sizer/sizer.dart';
 
@@ -69,7 +70,13 @@ class _InformationSectionState extends State<InformationSection> {
                     data: widget.petProfileDetails.petGender.toString(),
                   ),
                   // const SizedBox(height: 8),
-                  SectionDivider(),
+                  (isNotNullOrEmpty(widget.petProfileDetails.petChipId) ||
+                          isNotNullOrEmpty(
+                              widget.petProfileDetails.pet_licenceID) ||
+                          isNotNullOrEmpty(
+                              widget.petProfileDetails.pet_tattooID))
+                      ? const SectionDivider()
+                      : const SizedBox.shrink(),
                   InformationDisplay(
                     label: "Chip Number",
                     data: widget.petProfileDetails.petChipId,
@@ -82,7 +89,18 @@ class _InformationSectionState extends State<InformationSection> {
                     label: "Tattoo ID",
                     data: widget.petProfileDetails.pet_tattooID,
                   ),
-                  SectionDivider(),
+                  (isNotNullOrEmpty(widget
+                              .petProfileDetails.pet_favorite_activities) ||
+                          isNotNullOrEmpty(
+                              widget.petProfileDetails.pet_favorite_toys) ||
+                          isNotNullOrEmpty(
+                              widget.petProfileDetails.pet_special_needs) ||
+                          isNotNullOrEmpty(
+                              widget.petProfileDetails.pet_diet_preferences) ||
+                          isNotNullOrEmpty(
+                              widget.petProfileDetails.pet_behavioral_notes))
+                      ? const SectionDivider()
+                      : const SizedBox.shrink(),
                   InformationDisplay(
                     label: "Favorite Activities",
                     data: widget.petProfileDetails.pet_favorite_activities,
@@ -109,13 +127,15 @@ class _InformationSectionState extends State<InformationSection> {
                     compact: false,
                   ),
                   const SizedBox(height: 16),
-                  SectionDivider(),
+                  const SectionDivider(),
                   const SizedBox(height: 16),
                   BehInformation(
                     behaviourInformation:
                         widget.petProfileDetails.behaviourInformation,
                   ),
-                  SectionDivider(), const SizedBox(height: 16),
+                  // const SectionDivider(),
+
+                  const SizedBox(height: 16),
                 ],
               ),
 
@@ -177,7 +197,7 @@ class SectionDivider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(0, 6, 0, 6),
+      padding: const EdgeInsets.fromLTRB(0, 6, 0, 6),
       child: Divider(
         color: Colors.grey.shade300,
         thickness: 0.5,
@@ -201,89 +221,35 @@ class InformationDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (data != null) {
-      if (data!.isNotEmpty) {
-        return Padding(
-          padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
-          child: OverflowBar(
-            alignment: MainAxisAlignment.spaceBetween,
-            overflowSpacing: 6,
-            spacing: 16,
-            children: [
-              Text(
-                // label + ":  ",
-                label + " ",
-                style: GoogleFonts.openSans(
-                  fontWeight: FontWeight.w400,
-                  fontSize: 18,
-                  color: Colors.black.withOpacity(0.45),
-                ),
+    if (isNotNullOrEmpty(data)) {
+      return Padding(
+        padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+        child: OverflowBar(
+          alignment: MainAxisAlignment.spaceBetween,
+          overflowSpacing: 6,
+          spacing: 16,
+          children: [
+            Text(
+              // label + ":  ",
+              label + " ",
+              style: GoogleFonts.openSans(
+                fontWeight: FontWeight.w400,
+                fontSize: 18,
+                color: Colors.black.withOpacity(0.45),
               ),
-              // Spacer(),
-              Text(
-                data ?? "Oops",
-                style: GoogleFonts.openSans(
-                  fontWeight: FontWeight.w400,
-                  fontSize: 20,
-                  color: Colors.black.withOpacity(0.85),
-                ),
+            ),
+            // Spacer(),
+            Text(
+              data ?? "Oops",
+              style: GoogleFonts.openSans(
+                fontWeight: FontWeight.w400,
+                fontSize: 20,
+                color: Colors.black.withOpacity(0.85),
               ),
-            ],
-          ),
-        );
-        if (compact) {
-          return Column(
-            children: [
-              const SizedBox(height: 8),
-              Row(
-                children: [
-                  Text(
-                    // label + ":  ",
-                    label + " ",
-                    style: GoogleFonts.openSans(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 18,
-                      color: Colors.black.withOpacity(0.45),
-                    ),
-                  ),
-                  Spacer(),
-                  Text(
-                    data ?? "Oops",
-                    style: GoogleFonts.openSans(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 20,
-                      color: Colors.black.withOpacity(0.85),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          );
-        } else {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 8),
-              Text(
-                label,
-                style: GoogleFonts.openSans(
-                  fontWeight: FontWeight.w400,
-                  fontSize: 18,
-                  color: Colors.black.withOpacity(0.45),
-                ),
-              ),
-              Text(
-                data ?? "Oops",
-                style: GoogleFonts.openSans(
-                  fontWeight: FontWeight.w400,
-                  fontSize: 20,
-                  color: Colors.black.withOpacity(0.85),
-                ),
-              ),
-            ],
-          );
-        }
-      }
+            ),
+          ],
+        ),
+      );
     }
     return const SizedBox.shrink();
   }

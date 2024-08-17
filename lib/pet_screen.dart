@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:scanpage/features/features/description_section.dart';
 import 'package:scanpage/features/features/information_page.dart';
 import 'package:scanpage/features/features/information_section.dart';
+import 'package:scanpage/features/features/lost_section.dart';
 import 'package:scanpage/features/language/change_language_widget.dart';
 import 'package:scanpage/features/language/language_selector.dart';
 import 'package:scanpage/features/language/m_language.dart';
@@ -35,10 +36,22 @@ class PetScreen extends StatefulWidget {
 
 class _PetScreenState extends State<PetScreen> {
   List<GlobalKey> keyCap = List<GlobalKey>.generate(
-      4, (index) => GlobalKey(debugLabel: 'key_$index'),
+      5, (index) => GlobalKey(debugLabel: 'key_$index'),
       growable: false);
 
   // ScrollController scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback(
+      (timeStamp) {
+        if (widget.petProfileDetails.petIsLost) {
+          jumpToSection(5);
+        }
+      },
+    );
+  }
 
   void jumpToSection(int keynumber) {
     if (keyCap.elementAt(keynumber - 1).currentContext != null) {
@@ -137,29 +150,14 @@ class _PetScreenState extends State<PetScreen> {
                                 ),
                               ),
                               const SizedBox(height: 28),
-                              Text(
-                                "sp_FoundMeInformation".tr(),
-                                style: GoogleFonts.openSans(
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 16,
-                                  color: Colors.black.withOpacity(0.6),
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
-                              const SizedBox(height: 28),
                               !widget.scanned
                                   ? const SizedBox.shrink()
-                                  : Column(
-                                      children: [
-                                        const SizedBox(height: 28),
-                                        ActionButtons(
-                                          scanned: widget.scanned,
-                                          petProfileDetails:
-                                              widget.petProfileDetails,
-                                          scrollToContacts: () =>
-                                              jumpToSection(2),
-                                        ),
-                                      ],
+                                  : LostSection(
+                                      key: keyCap.elementAt(4),
+                                      petProfileDetails:
+                                          widget.petProfileDetails,
+                                      scrollToContacts: () => jumpToSection(2),
+                                      scanned: widget.scanned,
                                     ),
                               const SizedBox(height: 28),
                               // Text(
@@ -213,7 +211,9 @@ class _PetScreenState extends State<PetScreen> {
                                         ),
                                       ),
                                     ),
-                              widget.petProfileDetails.hide_information
+                              widget.petProfileDetails.hide_information ||
+                                      widget
+                                          .petProfileDetails.description.isEmpty
                                   ? const SizedBox.shrink()
                                   : DescriptionSection(
                                       petProfileDetails:

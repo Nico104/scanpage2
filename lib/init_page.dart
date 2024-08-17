@@ -22,9 +22,9 @@ class InitPage extends StatelessWidget {
           );
           // return Text("Wuhu");
         } else if (snapshot.hasError) {
-          return LookForTag();
+          return const LookForTag();
         } else {
-          return Material(child: CircularProgressIndicator());
+          return const Material(child: CircularProgressIndicator());
         }
       },
     );

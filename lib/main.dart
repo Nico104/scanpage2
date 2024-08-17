@@ -145,7 +145,7 @@ class MyApp extends StatelessWidget {
     ),
   );
 
-  //SharePage
+  // SharePage
   // final routerDelegate = BeamerDelegate(
   //   locationBuilder: RoutesLocationBuilder(
   //     routes: {

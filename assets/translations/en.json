@@ -55,5 +55,7 @@
     "sp_PicturePage_Title": "Pictures",
     "sp_PicturePage_NoPictures_FunnyInfo": "It looks quite empty in here",
     "sp_PicturePage_NoPictures": "No Pictures yet",
-    "change_Language_Label": "Change Language"
+    "change_Language_Label": "Change Language",
+    "iAmLost": "I am Lost!",
+    "sp_FoundMeInformation_Lost": "I am currently marked as lostt. If you found me please call or send my positions to my owner with the buttons below."
 }

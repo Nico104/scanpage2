@@ -43,34 +43,6 @@ class _LookForTagState extends State<LookForTag> {
               const Spacer(
                 flex: 2,
               ),
-              SizedBox(
-                width: 35.w,
-                child: Material(
-                  borderRadius: BorderRadius.circular(2),
-                  elevation: 1,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(2),
-                    child: AspectRatio(
-                        aspectRatio: 1,
-                        child: Image.asset("assets/code_illustration.png")),
-                  ),
-                ),
-              ),
-              const Spacer(flex: 2),
-              const ChangeLanguageWidget(),
-              const Spacer(flex: 2),
-              Text(
-                "sp_LookForTag_Instructions".tr(),
-                style: GoogleFonts.roboto(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.black45,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              const Spacer(
-                flex: 2,
-              ),
               Text(
                 "sp_LookForTag_EnterCode".tr(),
                 style: GoogleFonts.roboto(
@@ -143,6 +115,34 @@ class _LookForTagState extends State<LookForTag> {
                 ),
               ),
               const Spacer(flex: 2),
+              SizedBox(
+                width: 35.w,
+                child: Material(
+                  borderRadius: BorderRadius.circular(2),
+                  elevation: 1,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(2),
+                    child: AspectRatio(
+                        aspectRatio: 1,
+                        child: Image.asset("assets/code_illustration.png")),
+                  ),
+                ),
+              ),
+              const Spacer(flex: 2),
+              const ChangeLanguageWidget(),
+              const Spacer(flex: 2),
+              Text(
+                "sp_LookForTag_Instructions".tr(),
+                style: GoogleFonts.roboto(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.black45,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const Spacer(
+                flex: 2,
+              ),
               Text(
                 "sp_LookForTag_ContactIfFailure".tr() + 'email@email.com',
                 style: GoogleFonts.roboto(
