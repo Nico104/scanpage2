@@ -20,6 +20,10 @@ Future<PetProfileDetails> getPetFromScan(String code,
     PetProfileDetails pet =
         PetProfileDetails.fromJson(jsonDecode(response.body));
     if (scanned) {
+      //IF the pet is Lost there is always a notification on the scanlink
+      if (pet.petIsLost) {
+        notification = true;
+      }
       createNewScan(pet.profileId, notification: notification);
     }
     return pet;

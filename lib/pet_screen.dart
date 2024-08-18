@@ -81,14 +81,14 @@ class _PetScreenState extends State<PetScreen> {
   Widget build(BuildContext context) {
     // print(widget.petProfileDetails.medicalInformation.healthIssues.length);
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).canvasColor,
       body: Stack(
         children: [
           ScrollConfiguration(
             behavior:
                 ScrollConfiguration.of(context).copyWith(scrollbars: false),
             child: Container(
-              color: Colors.white,
+              color: Theme.of(context).canvasColor,
               child: ListView(
                 // crossAxisAlignment: CrossAxisAlignment.center,
                 shrinkWrap: true,
@@ -121,8 +121,8 @@ class _PetScreenState extends State<PetScreen> {
                     ),
                   ),
                   Container(
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).canvasColor,
                     ),
                     child: Column(
                       children: [
