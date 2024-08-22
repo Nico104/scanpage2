@@ -47,24 +47,24 @@ class ContactItem extends StatelessWidget {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Expanded(
-                  flex: 1,
-                  child: Column(
-                    children: [
-                      AspectRatio(
-                        aspectRatio: 1,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(16),
-                          child: Image.network(
-                            "https://picsum.photos/400",
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(width: 24),
+                // Expanded(
+                //   flex: 1,
+                //   child: Column(
+                //     children: [
+                //       AspectRatio(
+                //         aspectRatio: 1,
+                //         child: ClipRRect(
+                //           borderRadius: BorderRadius.circular(16),
+                //           child: Image.network(
+                //             "https://picsum.photos/400",
+                //             fit: BoxFit.cover,
+                //           ),
+                //         ),
+                //       ),
+                //     ],
+                //   ),
+                // ),
+                // const SizedBox(width: 24),
                 Expanded(
                   flex: 2,
                   child: Column(
