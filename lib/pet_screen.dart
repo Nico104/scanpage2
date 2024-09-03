@@ -14,6 +14,7 @@ import 'package:scanpage/features/language/m_language.dart';
 import 'package:scanpage/general/network_globals.dart';
 import 'package:scanpage/utils/models/m_pet_profile.dart';
 import 'package:scanpage/utils/utils_general.dart';
+import 'package:scanpage/utils/widgets/sendLocationPopUp.dart';
 import 'package:sizer/sizer.dart';
 
 import 'features/action_buttons/action_buttons_widget.dart';
@@ -46,8 +47,26 @@ class _PetScreenState extends State<PetScreen> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback(
       (timeStamp) {
-        if (widget.petProfileDetails.petIsLost) {
+        if (widget.petProfileDetails.petIsLost && widget.scanned) {
           jumpToSection(5);
+          Navigator.of(context).push(
+            PageRouteBuilder(
+              opaque: false,
+              barrierDismissible: true,
+              pageBuilder: (BuildContext context, _, __) {
+                return LocationPopup(
+                  petProfileDetails: widget.petProfileDetails,
+                  contactCallback: () {
+                    Navigator.pop(context);
+                    jumpToSection(2);
+                  },
+                );
+                // return LostPage(
+                //     petProfileDetails:
+                //         _petProfileDetails);
+              },
+            ),
+          );
         }
       },
     );

@@ -111,8 +111,11 @@ flutter:
 flutter_native_splash:
   # color: "#4169E1"
   # image: assets/tmp/ailogo1.png
-  color: "#f2f3f4"
-  image: assets/tmp/launch_icon_bright.png
+  # color: "#f2f3f4"
+  # image: assets/tmp/launch_icon_bright.png
+  color: "#ffffff"
+  image: web\assets\loading.gif
+
   # branding: assets/tmp/logo.png
   # color_dark: "#121212"
   # image_dark: assets/tmp/logo.png
